@@ -1,0 +1,37 @@
+Routes available:
+    1. /auth/google                  start O Auth flow to log user in
+    2. /auth/google/callback         where users get sent to after O Auth flow
+    3. /api/current_user             get current user
+    4. /auth/logout                  logout user
+
+    5. /api/blogs/:id                get blog with specific id
+    6. GET /api/blogs                get all blogs that belong to current user
+    7. POST /api/blogs               Create a new blog
+
+
+REDIS
+    INSTALLATION
+    1. # brew install redis 
+    2. # brew services start redis
+    3. # redis-cli ping
+
+    USAGE:
+        const redis = require('redis');
+        const redisUrl = 'redis://127.0.0.1:6379';
+
+        const redisClient = redis.createClient(redisUrl);
+        redisClient.hget = util.promisify(redisClient.hget);
+
+        redisClient.hset(this.hashKey, key, JSON.stringify(result), 'EX', 10);
+        const cacheValue = await redisClient.hget(this.hashKey, key);
+        redisClient.del(JSON.stringify(hashKey));
+
+
+MONGO QUERY
+Person.find({ occupation : hosy})
+    .where('name.last').equals('Ghost')
+    .where('age').gt('17').lt('66)
+    .where('likes').in(['vaporizing', 'talking'])
+    .limit(10)
+    .sort('-occupation')
+    .select('name occupation')
